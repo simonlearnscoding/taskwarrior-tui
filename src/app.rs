@@ -487,6 +487,16 @@ impl TaskwarriorTui {
     }
 
     fn draw_tabs(&self, f: &mut Frame<impl Backend>, layout: Rect) {
+        let navbar_block = Block::default().style(self.config.uda_style_navbar);
+        let report_name_span = Spans::from(vec![Span::from(&*self.report)]);
+        // let report_name = match self.mode {
+        //     Mode::Tasks(_) => "Tasks",
+        //     Mode::Projects => "Projects",
+        //     Mode::Calendar => "Calendar",
+        // };
+        // let report_name_span = Spans::from(vec![Span::from(report_name)]);
+        let p = Paragraph::new(Text::from(report_name_span)).block(navbar_block);
+        f.render_widget(p, layout);
         // let titles: Vec<&str> = vec!["Tasks", "Projects", "Calendar"];
         // let tab_names: Vec<_> = titles.into_iter().map(Spans::from).collect();
         // let selected_tab = match self.mode {
