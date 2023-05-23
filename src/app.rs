@@ -487,35 +487,35 @@ impl TaskwarriorTui {
     }
 
     fn draw_tabs(&self, f: &mut Frame<impl Backend>, layout: Rect) {
-        let titles: Vec<&str> = vec!["Tasks", "Projects", "Calendar"];
-        let tab_names: Vec<_> = titles.into_iter().map(Spans::from).collect();
-        let selected_tab = match self.mode {
-            Mode::Tasks(_) => 0,
-            Mode::Projects => 1,
-            Mode::Calendar => 2,
-        };
-        let navbar_block = Block::default().style(self.config.uda_style_navbar);
-        let context = Spans::from(vec![
-            Span::from("["),
-            Span::from(if self.current_context.is_empty() {
-                "none"
-            } else {
-                &self.current_context
-            }),
-            Span::from("]"),
-        ]);
-        let tabs = Tabs::new(tab_names)
-            .block(navbar_block.clone())
-            .select(selected_tab)
-            .divider(" ")
-            .highlight_style(Style::default().add_modifier(Modifier::BOLD));
-        let rects = Layout::default()
-            .direction(Direction::Horizontal)
-            .constraints([Constraint::Min(0), Constraint::Length(context.width() as u16)])
-            .split(layout);
-
-        f.render_widget(tabs, rects[0]);
-        f.render_widget(Paragraph::new(Text::from(context)).block(navbar_block), rects[1]);
+        // let titles: Vec<&str> = vec!["Tasks", "Projects", "Calendar"];
+        // let tab_names: Vec<_> = titles.into_iter().map(Spans::from).collect();
+        // let selected_tab = match self.mode {
+        //     Mode::Tasks(_) => 0,
+        //     Mode::Projects => 1,
+        //     Mode::Calendar => 2,
+        // };
+        // let navbar_block = Block::default().style(self.config.uda_style_navbar);
+        // let context = Spans::from(vec![
+        //     Span::from("["),
+        //     Span::from(if self.current_context.is_empty() {
+        //         "none"
+        //     } else {
+        //         &self.current_context
+        //     }),
+        //     Span::from("]"),
+        // ]);
+        // let tabs = Tabs::new(tab_names)
+        //     .block(navbar_block.clone())
+        //     .select(selected_tab)
+        //     .divider(" ")
+        //     .highlight_style(Style::default().add_modifier(Modifier::BOLD));
+        // let rects = Layout::default()
+        //     .direction(Direction::Horizontal)
+        //     .constraints([Constraint::Min(0), Constraint::Length(context.width() as u16)])
+        //     .split(layout);
+        //
+        // f.render_widget(tabs, rects[0]);
+        // f.render_widget(Paragraph::new(Text::from(context)).block(navbar_block), rects[1]);
     }
 
     pub fn draw_debug(&mut self, f: &mut Frame<impl Backend>) {
@@ -1080,21 +1080,21 @@ impl TaskwarriorTui {
             .split(rect);
 
         // render command title
-        let mut style = self.config.uda_style_command;
-        if error.is_some() {
-            style = style.fg(Color::Red);
-        };
-        let title_spans = if let Some(subtitle) = title.1 {
-            Spans::from(vec![title.0, Span::from(" ["), subtitle, Span::from("]")])
-        } else {
-            Spans::from(vec![title.0])
-        };
-        let title = Paragraph::new(Text::from(title_spans)).style(style);
-        f.render_widget(title, rects[0]);
-
-        // render command
-        let p = Paragraph::new(Text::from(text)).scroll((0, ((position + 2) as u16).saturating_sub(rects[1].width)));
-        f.render_widget(p, rects[1]);
+        // let mut style = self.config.uda_style_command;
+        // if error.is_some() {
+        //     style = style.fg(Color::Red);
+        // };
+        // let title_spans = if let Some(subtitle) = title.1 {
+        //     Spans::from(vec![title.0, Span::from(" ["), subtitle, Span::from("]")])
+        // } else {
+        //     Spans::from(vec![title.0])
+        // };
+        // let title = Paragraph::new(Text::from(title_spans)).style(style);
+        // f.render_widget(title, rects[0]);
+        //
+        // // render command
+        // let p = Paragraph::new(Text::from(text)).scroll((0, ((position + 2) as u16).saturating_sub(rects[1].width)));
+        // f.render_widget(p, rects[1]);
     }
 
     fn draw_task_details(&mut self, f: &mut Frame<impl Backend>, rect: Rect) {
